@@ -1,54 +1,53 @@
 class BankAccount {
-    constructor(name , balance, status, type) {
-        this.Name = name 
-        this.Balance = balance 
-        this.accountNumber = this.generateAccountNumber()
-        this.Status = status
-        this.Type = type
-
+    constructor(name, balance, status, type) {
+        this.name = name;
+        this.balance = balance;
+        this.accountNumber = this.generateAccountNumber();
+        this.status = status;
+        this.type = type;
     }
 
     generateAccountNumber() {
-        return Math.floor(Math.random() * 9000000000);
+        return Math.floor(1000000000 + Math.random() * 9000000000);
     }
 
-   
+    deposit(amount) {
+        if (this.status !== "active") {
+            return "Account is not active. Cannot deposit funds.";
+        }
 
+        if (this.type !== "savings" && this.type !== "current") {
+            return "Invalid account type.";
+        }
 
+        this.balance += amount;
 
-    // deposit funds
-    deposit(amount) {   
-    if (this.Status !== "active") {
-        return `Account is not active. Cannot deposit funds.`;    
-    }
-
-    if (this.Type !== "savings" && this.Type !== "current") {
-        return `Invalid account type. Cannot deposit funds.`;
-    }
-     this.balance += amount;
         return `Deposit successful. New balance: ${this.balance}`;
-}
+    }
 
-    // withdraw funds
     withdraw(amount) {
-        if (this.Status !== "active") {
-        return `Account is not active. Cannot withdraw funds.`;    
-    }
+        if (this.status !== "active") {
+            return "Account is not active. Cannot withdraw funds.";
+        }
 
-    if (this.Type !== "savings" && this.Type !== "current") {
-        return `Invalid account type. Cannot withdraw funds.`;
-    }
-    if (amount >= this.Balance) {
-        return `Insufficient funds.`;
-    }
-     this.Balance -= amount;
+        if (this.type !== "savings" && this.type !== "current") {
+            return "Invalid account type.";
+        }
+
+        if (amount > this.balance) {
+            return "Insufficient funds.";
+        }
+
+        this.balance -= amount;
+
         return `Withdrawal successful. New balance: ${this.balance}`;
+    }
 }
 
-}
+let account1 = new BankAccount("mafi", 1000, "active", "savings");
 
-
-let Account1 = new BankAccount ("mafi", 1000, "active", "savings")
-
-console.log(Account1)
-
+console.log(account1);
+console.log(account1.deposit(1000));
+console.log(account1);
+console.log(account1.withdraw(500));
+console.log(account1);
