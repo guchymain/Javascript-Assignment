@@ -45,9 +45,15 @@ class BankAccount {
 }
 
 let account1 = new BankAccount("mafi", 1000, "active", "savings");
+let account2 = new BankAccount("jogodo", 500, "inactive", "current");
 
 console.log(account1);
 console.log(account1.deposit(1000));
 console.log(account1);
 console.log(account1.withdraw(500));
 console.log(account1);
+console.log(account2);
+console.log(account2.deposit(1000));
+console.log(account2);
+console.log(account2.withdraw(500));
+console.log(account2);
